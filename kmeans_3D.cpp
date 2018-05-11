@@ -103,7 +103,6 @@ int main(int argc, char *argv[]){
 	 	for(int i=0; i<points.size(); ++i){
 	 		for(int j=0; j<clusters.size(); ++j){
 				dist = calculateEucledianDistance(points[i], clusters[j].getCentroid());
-				cout << dist << ' ';
 				if (j == 0){
 					min_dist = dist;
 					index = j;
@@ -116,26 +115,22 @@ int main(int argc, char *argv[]){
 
 
 	 		}
-	 		cout << ' ' << min_dist << ' ' << index << endl;
 	 		clusters[index].addPoint(points[i]);
 	 	}
 
 	 	vintage_clusters = clusters;
 
 	 	for(int i=0; i<clusters.size(); ++i){
-	 		// cout << vintage_clusters.size() << "\n";
-	 		// cout << calculateEucledianDistance(vintage_clusters[i].getCentroid(), clusters[i].getCentroid()) << endl;
-	 		clusters[i].setCentroid(calculateCentroid(clusters[i].getClusterPoints()));
+	 		
+			clusters[i].setCentroid(calculateCentroid(clusters[i].getClusterPoints()));
 
 	 		if((vintage_clusters.size() != 0) && (calculateEucledianDistance(vintage_clusters[i].getCentroid(), clusters[i].getCentroid()) == 0)){
 	 			end = 1;
 	 		}else{
 	 			end = 0;
 	 		}
-	 		cout << clusters[i].getCentroid().getX() << ' ' << clusters[i].getCentroid().getY() << ' ' << clusters[i].getCentroid().getZ() << ' ' << clusters[i].getClusterPoints().size() << endl;
 	 			 		clusters[i].clearCluster();
 
-	 		// cout << vintage_clusters[i].getCentroid().getX() << ' ' << vintage_clusters[i].getCentroid().getY() << ' ' << vintage_clusters[i].getCentroid().getZ() << ' ' << vintage_clusters[i].getClusterPoints().size() << endl;
 
 	 	}
 
